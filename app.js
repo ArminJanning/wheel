@@ -4,14 +4,19 @@ const spinBtn = document.getElementById("spin");
 const result = document.getElementById("result");
 
 function resizeCanvas() {
-  const container = canvas.parentElement;
+  // Make wheel responsive to viewport instead of parent
   const size = Math.min(
-    container.clientWidth,
-    container.clientHeight,
-    600
+    window.innerWidth * 0.85,
+    window.innerHeight * 0.85,
   );
+
   canvas.width = size;
   canvas.height = size;
+
+  // Center visually
+  canvas.style.display = "block";
+  canvas.style.margin = "0 auto";
+
   if (window.entries && window.entries.length > 0) {
     drawWheel();
   }
@@ -23,18 +28,18 @@ window.addEventListener('resize', resizeCanvas);
 function getNamesFromURL() {
   const params = new URLSearchParams(window.location.search);
   const raw = params.get("names");
-
   const defaultSchools = [
-    "ITES Einaudi Gramsci - Padova",
-    "ITET Einaudi – Bassano del Grappa",
-    "Liceo Don G. Fogazzaro - Vicenza",
-    "Liceo F. Corradini - Thiene",
-    "Squadra arcobaleno Liceo F. Corradini, Thiene",
-    "IIS GG. Trissino, Valdagno",
-    "Liceo Lucrezio Caro, Cittadella",
-    "IIS Newton-Pertini, Padova",
-    "ISISS M. Casagrande, Pieve di Soligo",
-    "Liceo Brocchi, Bassano"
+    "10.03",
+	"11.03",
+	"13.03",
+	"17.03",
+	"18.03",
+	"19.03",
+	"20.03",
+	"24.03",
+	"25.03",
+	"27.03",
+	"31.03"
   ];
 
   if (!raw) return defaultSchools;
@@ -154,3 +159,4 @@ window.addEventListener("load", () => {
     spin();        // poi gira automaticamente
   }, 400);         // piccolo delay = effetto più naturale
 });
+
