@@ -8,15 +8,16 @@ canvas.height = 480;
 
 function getNamesFromURL() {
   const params = new URLSearchParams(window.location.search);
-  const names = params.get("names");
+  const raw = params.get("names");
 
-  if (!names) return ["A","B","C","D"];
+  if (!raw) return ["Default A","Default B"];
 
-  return names
-    .split(",")
+  return raw
+    .split("|")                       // 👈 new separator
     .map(n => decodeURIComponent(n.trim()))
     .filter(n => n.length > 0);
 }
+
 
 const entries = getNamesFromURL();
 const sliceAngle = (Math.PI * 2) / entries.length;
